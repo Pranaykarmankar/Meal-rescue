@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Meal Rescue</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="admin-page">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <a href="/" class="logo"><div class="logo-icon">🍱</div> MealRescue</a>
+      <button class="admin-nav-item active" onclick="showSection('overview', this)">📊 Overview</button>
+      <button class="admin-nav-item" onclick="showSection('merchants', this)">🏪 Merchants</button>
+      <button class="admin-nav-item" onclick="showSection('users', this)">👥 Users</button>
+      <button class="admin-nav-item" onclick="showSection('orders', this)">📦 Orders</button>
+      <button class="admin-nav-item" onclick="logout()">🚪 Log Out</button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <h1>Admin Dashboard</h1>
+
+      <!-- Overview Section -->
+      <div id="section-overview">
+        <div class="admin-stats" id="adminStats"></div>
+        <div class="admin-charts">
+          <div class="chart-card"><h4>Daily Meals Rescued (7 days)</h4><canvas id="mealsChart"></canvas></div>
+          <div class="chart-card"><h4>Revenue Trend (7 days)</h4><canvas id="revenueChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Merchants Section -->
+      <div id="section-merchants" style="display:none">
+        <div class="admin-section">
+          <h3>Pending Approvals</h3>
+          <div id="pendingTable"></div>
+        </div>
+      </div>
+
+      <!-- Users Section -->
+      <div id="section-users" style="display:none">
+        <div class="admin-section">
+          <h3>All Users</h3>
+          <div id="usersTable"></div>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div id="section-orders" style="display:none">
+        <div class="admin-section">
+          <h3>Recent Orders</h3>
+          <div id="ordersTable"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/animations.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

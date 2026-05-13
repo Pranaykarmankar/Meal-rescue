@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: meal_rescue_web
+    ports:
+      - "8000:8000"
+    environment:
+      # Override the DATABASE_URL to point to the 'db' service container
+      - DATABASE_URL=mysql+aiomysql://root:mealrescue123@db:3306/meal_rescue
+      - SECRET_KEY=meal-rescue-super-secret-key-change-in-production-2024
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - REFRESH_TOKEN_EXPIRE_DAYS=7
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: meal_rescue_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mealrescue123
+      MYSQL_DATABASE: meal_rescue
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmealrescue123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:

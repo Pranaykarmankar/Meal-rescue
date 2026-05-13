@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Detail — Meal Rescue</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <style>
+    .detail-page { min-height:100vh; background:var(--color-bg); }
+    .detail-hero { position:relative; height:360px; overflow:hidden; background:#f0f0f0; }
+    .detail-hero img { width:100%; height:100%; object-fit:cover; }
+    .detail-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:50%; background:linear-gradient(transparent, rgba(0,0,0,0.5)); }
+    .detail-back { position:absolute; top:1rem; left:1rem; z-index:10; width:40px; height:40px; background:rgba(0,0,0,0.4); backdrop-filter:blur(8px); border-radius:50%; border:none; color:white; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all var(--transition); }
+    .detail-back:hover { background:rgba(0,0,0,0.6); }
+    .detail-content { max-width:700px; margin:-80px auto 0; position:relative; z-index:5; padding:0 1.5rem 3rem; }
+    .detail-card { background:var(--color-surface); border-radius:var(--radius-xl); padding:2rem; box-shadow:var(--shadow-lg); animation:fadeSlideUp 0.5s ease; }
+    .detail-shop { display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; }
+    .detail-shop-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg, var(--color-primary), var(--color-accent)); display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem; }
+    .detail-shop-info h4 { font-size:0.95rem; }
+    .detail-shop-info p { font-size:0.8rem; color:var(--color-text-muted); }
+    .detail-title { font-size:1.5rem; margin-bottom:0.75rem; }
+    .detail-desc { color:var(--color-text-secondary); margin-bottom:1.25rem; line-height:1.7; }
+    .detail-price-row { display:flex; align-items:baseline; gap:0.75rem; margin-bottom:1.5rem; }
+    .detail-price-original { font-size:1.1rem; color:var(--color-text-muted); text-decoration:line-through; }
+    .detail-price-current { font-size:2rem; font-weight:800; color:var(--color-primary); }
+    .detail-price-discount { background:var(--color-primary-bg); color:var(--color-primary); padding:0.25rem 0.75rem; border-radius:var(--radius-pill); font-size:0.8rem; font-weight:700; }
+    .detail-tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem; }
+    .detail-pickup { background:var(--color-border-light); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-bottom:1.5rem; }
+    .detail-pickup h4 { font-size:0.85rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem; }
+    .detail-pickup .time-bar { height:6px; background:var(--color-border); border-radius:3px; overflow:hidden; margin-top:0.5rem; }
+    .detail-pickup .time-bar-fill { height:100%; background:linear-gradient(90deg, var(--color-primary), var(--color-accent)); border-radius:3px; transition:width 0.5s ease; }
+    .detail-qty { margin-bottom:1.5rem; }
+    .detail-qty-bar { height:8px; background:var(--color-border); border-radius:4px; overflow:hidden; }
+    .detail-qty-fill { height:100%; background:var(--color-success); border-radius:4px; transition:width var(--transition); }
+    .reserve-btn { width:100%; }
+    @media (max-width:768px) { .detail-hero { height:260px; } .detail-content { margin-top:-60px; } }
+  </style>
+</head>
+<body>
+  <div class="detail-page">
+    <div class="detail-hero" id="detailHero">
+      <button class="detail-back" onclick="history.back()">←</button>
+      <img id="heroImg" src="" alt="">
+    </div>
+    <div class="detail-content">
+      <div class="detail-card" id="detailCard">
+        <div class="skeleton" style="height:300px;border-radius:var(--radius-lg)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Complete Reservation</h3>
+        <button class="modal-close" onclick="closePaymentModal()">×</button>
+      </div>
+      <div id="paymentBody"></div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/websocket.js"></script>
+  <script src="/js/animations.js"></script>
+  <script src="/js/box-detail.js"></script>
+</body>
+</html>

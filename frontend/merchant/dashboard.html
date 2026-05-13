@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merchant Dashboard — Meal Rescue</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/merchant.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+</head>
+<body>
+  <div class="merchant-page">
+    <div id="navbar"></div>
+    <div class="merchant-content">
+      <h1>Merchant Dashboard</h1>
+
+      <!-- Stats Row -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card"><div class="skeleton" style="height:100px"></div></div>
+        <div class="stat-card"><div class="skeleton" style="height:100px"></div></div>
+        <div class="stat-card"><div class="skeleton" style="height:100px"></div></div>
+        <div class="stat-card"><div class="skeleton" style="height:100px"></div></div>
+      </div>
+
+      <!-- Active Listings -->
+      <h3 style="margin-bottom:1rem">Active Listings</h3>
+      <div id="listingsContainer"></div>
+
+      <!-- QR Scanner Section -->
+      <div class="scanner-section">
+        <h3 style="margin-bottom:0.5rem">Scan Customer QR</h3>
+        <p style="color:var(--color-text-muted);margin-bottom:1rem;font-size:0.9rem">Point the camera at the customer's QR code to verify their order</p>
+        <button class="btn btn-primary" id="scanBtn" onclick="startScanner()">📷 Start Scanner</button>
+        <div id="scannerContainer" style="display:none">
+          <div class="scanner-overlay">
+            <canvas id="scannerCanvas" class="scanner-video"></canvas>
+            <div class="scanner-corners"></div>
+          </div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="stopScanner()">Stop Scanner</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Box FAB -->
+    <button class="post-box-btn" onclick="openPostPanel()">+</button>
+
+    <!-- Post Box Panel Overlay -->
+    <div class="post-overlay" id="postOverlay" onclick="closePostPanel()"></div>
+
+    <!-- Post Box Panel -->
+    <div class="post-panel" id="postPanel">
+      <div class="post-panel-header">
+        <h3>Post a Surprise Box</h3>
+        <button class="modal-close" onclick="closePostPanel()">×</button>
+      </div>
+      <form class="post-form" id="postForm" onsubmit="submitBox(event)">
+        <div class="form-group full-width">
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imageInput').click()">
+            <div style="font-size:2rem;margin-bottom:0.5rem">📸</div>
+            <p style="font-weight:600;margin-bottom:0.25rem">Drop image here or click to upload</p>
+            <p style="font-size:0.8rem;color:var(--color-text-muted)">JPG or PNG, max 5MB</p>
+            <input type="file" id="imageInput" accept="image/jpeg,image/png" style="display:none" onchange="handleImageUpload(this)">
+            <img id="imagePreview" class="upload-preview" style="display:none">
+          </div>
+        </div>
+        <div class="form-group"><input type="text" id="boxTitle" placeholder=" " required><label>Box Title</label></div>
+        <div class="form-group"><input type="number" id="boxPrice" placeholder=" " required min="1" step="1"><label>Original Price (₹)</label></div>
+        <div class="form-group"><input type="number" id="boxQty" placeholder=" " required min="1" value="5"><label>Quantity</label></div>
+        <div class="form-group"><input type="text" id="boxDesc" placeholder=" "><label>Description (optional)</label></div>
+        <div class="form-group"><input type="datetime-local" id="pickupStart" required><label>Pickup Start</label></div>
+        <div class="form-group"><input type="datetime-local" id="pickupEnd" required><label>Pickup End</label></div>
+        <div class="full-width" style="margin-bottom:1rem">
+          <p style="font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">Tags</p>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap" id="tagSelector">
+            <button type="button" class="chip" onclick="toggleTag(this)" data-tag="Veg">🥬 Veg</button>
+            <button type="button" class="chip" onclick="toggleTag(this)" data-tag="High Protein">💪 High Protein</button>
+            <button type="button" class="chip" onclick="toggleTag(this)" data-tag="Contains Dairy">🧀 Contains Dairy</button>
+            <button type="button" class="chip" onclick="toggleTag(this)" data-tag="Bakery">🥐 Bakery</button>
+            <button type="button" class="chip" onclick="toggleTag(this)" data-tag="Asian">🍜 Asian</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg full-width" id="submitBoxBtn">
+          <span class="btn-text">Post Box</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Flash Overlay -->
+  <div class="flash-overlay success" id="flashOverlay" style="display:none">
+    <div class="flash-icon">✓</div>
+    <div class="flash-text" id="flashText">Order Verified!</div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/websocket.js"></script>
+  <script src="/js/animations.js"></script>
+  <script src="/js/merchant.js"></script>
+</body>
+</html>

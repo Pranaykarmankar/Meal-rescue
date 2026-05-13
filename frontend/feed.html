@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Feed — Meal Rescue</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/feed.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+  <div class="feed-page">
+    <!-- Top Bar -->
+    <div class="feed-topbar">
+      <div class="feed-topbar-inner" id="topbar"></div>
+    </div>
+
+    <!-- Filter Chips -->
+    <div class="filter-row" id="filterRow">
+      <button class="filter-chip active" data-filter="all" onclick="applyFilter('all', this)">🔥 All</button>
+      <button class="filter-chip" data-filter="veg" onclick="applyFilter('veg', this)">🥬 Veg Only</button>
+      <button class="filter-chip" data-filter="protein" onclick="applyFilter('protein', this)">💪 High Protein</button>
+      <button class="filter-chip" data-filter="dairy" onclick="applyFilter('dairy', this)">🧀 Contains Dairy</button>
+      <button class="filter-chip" data-filter="cheap" onclick="applyFilter('cheap', this)">💰 Under ₹50</button>
+      <button class="filter-chip" data-filter="soon" onclick="applyFilter('soon', this)">⏰ Pickup Soon</button>
+    </div>
+
+    <!-- Box Grid -->
+    <div class="feed-grid" id="feedGrid"></div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display:none">
+      <div class="empty-state-icon">🍜</div>
+      <h3>All rescued for tonight!</h3>
+      <p>Check back tomorrow — new surprise boxes drop daily around 5 PM.</p>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/websocket.js"></script>
+  <script src="/js/animations.js"></script>
+  <script src="/js/feed.js"></script>
+</body>
+</html>

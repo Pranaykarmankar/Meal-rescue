@@ -1,0 +1,965 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Meal-Rescue — Mobile Responsive Stylesheet
+   Comprehensive mobile-first responsive overrides
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Mobile Hamburger Button ─────────────────────────────────────── */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition);
+  z-index: 1100;
+}
+
+.mobile-menu-btn:hover {
+  background: var(--color-border-light);
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.mobile-menu-btn.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-menu-btn.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ── Mobile Navigation Overlay ───────────────────────────────────── */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1050;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+}
+
+/* ── Mobile Navigation Drawer ────────────────────────────────────── */
+.mobile-nav-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 85vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-surface);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  z-index: 1060;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-nav-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+  background: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-surface) 100%);
+}
+
+.mobile-nav-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mobile-nav-links {
+  padding: 0.75rem 0;
+  flex: 1;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: all var(--transition);
+  border-left: 3px solid transparent;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
+}
+
+.mobile-nav-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* Show hamburger + drawer only on mobile */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+  .mobile-nav-overlay {
+    display: block;
+  }
+  .mobile-nav-drawer {
+    display: flex;
+  }
+}
+
+
+/* ── Mobile-Optimized Touch Targets ─────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Increase base touch-target sizes */
+  .btn,
+  .chip,
+  .filter-chip,
+  .tab-btn,
+  .auth-tab,
+  .role-option,
+  button {
+    min-height: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent zoom on input focus (iOS) */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* ── Navbar: Mobile Hamburger + Compact ────────────────────────── */
+
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-inner {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .navbar-logo {
+    font-size: 1.15rem;
+    gap: 0.35rem;
+  }
+
+  .navbar-logo .logo-img {
+    height: 32px;
+  }
+
+  .navbar-actions {
+    gap: 0.5rem !important;
+  }
+
+  .navbar-actions .btn-ghost.btn-sm {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .notification-bell {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* ── Toast: Full-width on mobile ───────────────────────────────── */
+
+  .toast-container {
+    top: auto;
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .toast {
+    min-width: unset;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* ── Dropdown: Full-width on mobile ────────────────────────────── */
+
+  .dropdown-menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    max-width: 100%;
+    transform: translateY(100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.15);
+    z-index: 10001;
+  }
+
+  .dropdown-menu.open {
+    transform: translateY(0);
+  }
+
+  .dropdown-item {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  /* ── Feed Page: Mobile Grid ────────────────────────────────────── */
+
+  .feed-topbar-inner {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .feed-search {
+    order: 3;
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+
+  .feed-search input {
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    font-size: 16px;
+  }
+
+  .filter-row {
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-chip {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .feed-grid {
+    grid-template-columns: 1fr;
+    padding: 0.75rem 1rem;
+    gap: 1.25rem;
+  }
+
+  /* ── Box Card: Mobile-Optimized ────────────────────────────────── */
+
+  .box-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .box-card-image {
+    height: 200px;
+  }
+
+  .box-card-body {
+    padding: 0.85rem 1rem 1rem;
+  }
+
+  .box-card-title {
+    font-size: 0.95rem;
+  }
+
+  .price-current {
+    font-size: 1.2rem;
+  }
+
+  /* Show reserve button always on mobile (no hover) */
+  .box-card .box-card-reserve {
+    position: relative;
+    transform: translateY(0);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+
+  .box-card:hover {
+    transform: none;
+  }
+
+  /* ── Box Detail Page: Mobile ───────────────────────────────────── */
+
+  .detail-hero {
+    height: 220px !important;
+  }
+
+  .detail-content {
+    margin-top: -50px !important;
+    padding: 0 1rem 2rem !important;
+  }
+
+  .detail-card {
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .detail-title {
+    font-size: 1.25rem !important;
+  }
+
+  .detail-price-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .detail-price-current {
+    font-size: 1.6rem !important;
+  }
+
+  .detail-back {
+    top: 0.75rem !important;
+    left: 0.75rem !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  /* ── My Orders Page: Mobile ────────────────────────────────────── */
+
+  .orders-content {
+    padding: 1rem !important;
+  }
+
+  .orders-content h1 {
+    font-size: 1.4rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .order-card {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 1.25rem 1rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .order-img {
+    align-self: center;
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .order-status {
+    align-self: center;
+  }
+
+  .tabs {
+    margin-bottom: 1.25rem;
+  }
+
+  .tab-btn {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  /* Streak Section */
+  .streak-section {
+    padding: 1.5rem !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  .streak-stats {
+    gap: 1rem !important;
+  }
+
+  .streak-stat-value {
+    font-size: 1.5rem !important;
+  }
+
+  .badges-row {
+    gap: 0.5rem !important;
+  }
+
+  .badge-medal {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* QR Section mobile */
+  .qr-section {
+    padding: 1.5rem !important;
+  }
+
+  /* ── Auth Page: Mobile ─────────────────────────────────────────── */
+
+  .auth-page {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  .auth-card {
+    border-radius: var(--radius-lg);
+    max-width: 100%;
+  }
+
+  .auth-header {
+    padding: 1.75rem 1.25rem 1rem;
+  }
+
+  .auth-header .logo {
+    font-size: 1.3rem;
+  }
+
+  .auth-tabs {
+    margin: 0 1.25rem;
+  }
+
+  .auth-form {
+    padding: 1.25rem;
+  }
+
+  .auth-footer {
+    padding: 1.25rem;
+  }
+
+  .role-toggle {
+    flex-direction: row;
+  }
+
+  .role-option {
+    font-size: 0.8rem;
+    padding: 0.55rem;
+  }
+
+  /* ── Merchant Dashboard: Mobile ────────────────────────────────── */
+
+  .merchant-content {
+    padding: 1rem !important;
+  }
+
+  .merchant-content h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card-value {
+    font-size: 1.4rem;
+  }
+
+  .stat-card-label {
+    font-size: 0.75rem;
+  }
+
+  .stat-card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-box-btn {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 2rem !important;
+    bottom: 2rem !important;
+    right: 1.5rem !important;
+    z-index: 9999 !important;
+    touch-action: manipulation;
+  }
+
+  .post-panel {
+    padding: 1.25rem !important;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+  }
+
+  .post-form {
+    grid-template-columns: 1fr !important;
+  }
+
+  .listing-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .listing-card-img {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .scanner-section {
+    padding: 1.25rem !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  .scanner-video {
+    max-width: 100% !important;
+  }
+
+  /* ── Admin Dashboard: Mobile ───────────────────────────────────── */
+
+  .admin-page {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 0;
+    display: flex;
+    overflow-x: auto;
+    padding: 0.6rem 0.75rem;
+    gap: 0.4rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .admin-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .admin-sidebar .logo {
+    display: none;
+  }
+
+  .admin-nav-item {
+    white-space: nowrap;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+    min-height: 38px;
+  }
+
+  .admin-nav-item::before {
+    display: none;
+  }
+
+  .admin-nav-item.active {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .admin-main {
+    padding: 1.25rem !important;
+  }
+
+  .admin-main h1 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .admin-charts {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .chart-card {
+    padding: 1.25rem;
+  }
+
+  .chart-card canvas {
+    height: 200px !important;
+  }
+
+  .admin-section {
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Data table horizontal scroll on mobile */
+  .data-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .table-actions {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .table-actions .btn {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  /* ── Modal: Full-width sheet on mobile ─────────────────────────── */
+
+  .modal-overlay {
+    align-items: flex-end;
+  }
+
+  .modal-content {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    max-width: 100%;
+    max-height: 85vh;
+    padding: 1.5rem;
+  }
+
+  /* ── Landing Page: Mobile Polish ───────────────────────────────── */
+
+  .hero {
+    padding: 3rem 1rem !important;
+    min-height: 85vh;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  #brandTitle {
+    font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.6rem, 5vw, 2.5rem) !important;
+    margin-bottom: 1rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+  }
+
+  .hero-counter {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-counter .count-num {
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.85rem 2rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* How It Works */
+  .how-section {
+    padding: 3.5rem 0 !important;
+  }
+
+  .how-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .how-section .section-sub {
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .how-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .how-card {
+    padding: 2rem 1.5rem;
+  }
+
+  /* Impact Section */
+  .impact-section {
+    padding: 3.5rem 0 !important;
+  }
+
+  .impact-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem;
+  }
+
+  .impact-card {
+    padding: 1.25rem;
+  }
+
+  .impact-icon {
+    font-size: 2rem;
+  }
+
+  .impact-value {
+    font-size: 2rem;
+  }
+
+  .impact-label {
+    font-size: 0.85rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 3.5rem 0 !important;
+  }
+
+  .cta-section h2 {
+    font-size: 1.35rem;
+  }
+
+  .cta-section p {
+    font-size: 0.95rem;
+  }
+
+  .cta-section .btn {
+    padding: 0.85rem 2rem;
+    font-size: 0.95rem;
+    width: 90%;
+    max-width: 280px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 0;
+    font-size: 0.8rem;
+  }
+
+  /* ── Upload Zone ───────────────────────────────────────────────── */
+
+  .upload-zone {
+    padding: 1.5rem 1rem;
+  }
+
+  .upload-preview {
+    max-width: 150px !important;
+  }
+
+  /* ── Sections global ───────────────────────────────────────────── */
+
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* ── Misc utility ──────────────────────────────────────────────── */
+
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+/* ── Extra-small screens (below 360px) ───────────────────────────── */
+@media (max-width: 360px) {
+
+  .navbar-logo span {
+    display: none;
+  }
+
+  .navbar-logo .logo-img {
+    height: 28px;
+  }
+
+  .hero {
+    padding: 2rem 0.75rem !important;
+    min-height: 80vh;
+  }
+
+  #brandTitle {
+    font-size: 2rem !important;
+  }
+
+  .hero h1 {
+    font-size: 1.3rem !important;
+  }
+
+  .stats-grid,
+  .admin-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .streak-stats {
+    flex-direction: column;
+    gap: 0.75rem !important;
+  }
+
+  .auth-page {
+    padding: 0.5rem;
+    padding-top: 1rem;
+  }
+}
+
+/* ── Tablet (768px - 1024px) ─────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .feed-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .how-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .admin-sidebar {
+    width: 200px;
+  }
+
+  .admin-nav-item {
+    font-size: 0.85rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .admin-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Safe area padding for notched phones ────────────────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .navbar {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .footer,
+  .post-panel,
+  .modal-content {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  .post-box-btn {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+
+  .toast-container {
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* ── Smooth scrolling momentum on iOS ────────────────────────────── */
+.filter-row,
+.admin-sidebar,
+.data-table {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Prevent text size adjustment on orientation change ──────────── */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ── Hover-only effects: Disable on touch devices ────────────────── */
+@media (hover: none) {
+  .box-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .box-card .box-card-reserve {
+    position: relative;
+    transform: translateY(0);
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  .how-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .stat-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .chart-card:hover {
+    transform: none;
+  }
+}
+
+/* ── Landscape phone orientation ─────────────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh;
+    padding: 1.5rem 2rem !important;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+  }
+
+  .hero-buttons .btn {
+    width: auto;
+  }
+
+  .auth-page {
+    padding: 1rem;
+    align-items: center;
+  }
+}
