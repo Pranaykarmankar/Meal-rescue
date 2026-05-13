@@ -64,8 +64,9 @@ async function request(method, url, body = null, retry = true) {
   try {
     let res = await fetch(`${API_BASE}${url}`, options);
 
-    // On 401, try refreshing the token once
-    if (res.status === 401 && retry) {
+    // On 401, try refreshing the token once (except for login/register)
+    const isAuthRoute = url.includes('/auth/login') || url.includes('/auth/register');
+    if (res.status === 401 && retry && !isAuthRoute) {
       const refreshed = await refreshAccessToken();
       if (refreshed) {
         return request(method, url, body, false);

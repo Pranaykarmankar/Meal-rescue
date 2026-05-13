@@ -5,12 +5,12 @@
 .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:2rem; }
 .post-box-btn { position:fixed; bottom:2rem; right:2rem; width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg, var(--color-primary), var(--color-primary-light)); color:white; font-size:2rem; border:none; cursor:pointer; box-shadow:var(--shadow-lg), var(--shadow-glow-green); z-index:100; transition:all var(--transition); display:flex; align-items:center; justify-content:center; }
 .post-box-btn:hover { transform:scale(1.1); }
-.post-panel { position:fixed; bottom:0; left:0; right:0; z-index:1000; background:var(--color-surface); border-radius:var(--radius-xl) var(--radius-xl) 0 0; box-shadow:0 -8px 32px rgba(0,0,0,0.15); max-height:90vh; overflow-y:auto; transform:translateY(100%); transition:transform var(--transition-slow); padding:2rem; }
+.post-panel { position:fixed; bottom:0; left:0; right:0; z-index:10005; background:var(--color-surface); border-radius:var(--radius-xl) var(--radius-xl) 0 0; box-shadow:0 -8px 32px rgba(0,0,0,0.15); max-height:90vh; overflow-y:auto; transform:translateY(100%); transition:transform var(--transition-slow); padding:2rem; }
 .post-panel.open { transform:translateY(0); }
 .post-panel-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
 .post-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
 .post-form .full-width { grid-column:1/-1; }
-.post-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:999; opacity:0; visibility:hidden; transition:all var(--transition); }
+.post-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:10004; opacity:0; visibility:hidden; transition:all var(--transition); }
 .post-overlay.open { opacity:1; visibility:visible; }
 .upload-zone { border:2px dashed var(--color-border); border-radius:var(--radius-lg); padding:2rem; text-align:center; cursor:pointer; transition:all var(--transition); background:var(--color-border-light); }
 .upload-zone:hover { border-color:var(--color-primary); background:var(--color-primary-bg); }

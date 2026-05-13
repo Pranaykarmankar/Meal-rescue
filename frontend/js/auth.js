@@ -86,7 +86,7 @@ async function handleLogin(e) {
 
   } catch (err) {
     showToast(err.message, 'error');
-    showFieldError('loginEmail', '');
+    showFieldError('loginEmail', err.message);
   } finally {
     setLoading(btn, false);
   }

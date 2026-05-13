@@ -21,7 +21,7 @@ async def seed_data():
     async with AsyncSessionLocal() as session:
         # Check if users already exist
         from sqlalchemy import select
-        result = await session.execute(select(User).where(User.email.in_(['merchant@example.com', 'consumer@example.com'])))
+        result = await session.execute(select(User).where(User.email.in_(['merchant@example.com', 'consumer@example.com', 'admin@example.com'])))
         existing_users = result.scalars().all()
         if existing_users:
             print("Database already seeded with these test users!")
@@ -60,6 +60,16 @@ async def seed_data():
             role=UserRole.consumer
         )
         session.add(consumer_user)
+        await session.flush()
+
+        # 4. Create Admin User
+        admin_user = User(
+            name="System Admin",
+            email="admin@example.com",
+            password_hash=pwd_hash,
+            role=UserRole.admin
+        )
+        session.add(admin_user)
         await session.flush()
 
         consumer_streak = RescueStreak(

@@ -72,11 +72,15 @@ async function deleteBox(boxId) {
 function openPostPanel() {
   document.getElementById('postPanel').classList.add('open');
   document.getElementById('postOverlay').classList.add('open');
+  const fab = document.querySelector('.post-box-btn');
+  if (fab) fab.style.display = 'none';
 }
 
 function closePostPanel() {
   document.getElementById('postPanel').classList.remove('open');
   document.getElementById('postOverlay').classList.remove('open');
+  const fab = document.querySelector('.post-box-btn');
+  if (fab) fab.style.display = 'flex';
 }
 
 function toggleTag(btn) {
